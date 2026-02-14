@@ -835,3 +835,147 @@ curl --request DELETE \
 --url 'https://app.hydrozen.io/api/notification-handlers/{notification_handler_id}' \  
 --header 'Authorization: Bearer  {api_key}' \
 ```
+
+
+---
+
+## DNS monitors
+
+### Retrieve all DNS monitors
+
+**Endpoint**
+
+*GET* `https://app.hydrozen.io/api/dns-monitors`
+
+**Example**
+
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/dns-monitors' \
+--header 'Authorization: Bearer {api_key}'
+```
+
+**Response example**
+
+```json
+
+{
+  "data": [
+    {
+      "id": 1,
+      "project_id": 0,
+      "name": "Sample",
+      "target": "example.com",
+      "dns": {
+        "A": [
+          {
+            "host": "example.com",
+            "ip": "12.12.12.12"
+          }
+        ],
+        "CNAME": [],
+        "HINFO": [],
+        "CAA": [],
+        "MX": []
+      },
+      "notifications": [1],
+      "settings": {
+        "dns_check_interval_seconds": 300
+      },
+      "total_checks": 1,
+      "total_changes": 0,
+      "last_check_datetime": "2024-01-03 01:48:42",
+      "next_check_datetime": "2024-01-03 01:49:13",
+      "last_change_datetime": null,
+      "is_enabled": true,
+      "datetime": "2023-12-31 03:54:09",
+      "last_datetime": "2024-01-03 00:16:36"
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "results_per_page": 25,
+    "total": 1,
+    "total_pages": 1
+  },
+  "links": {
+    "first": "https://app.hydrozen.io/api/dns-monitors?page=1",
+    "last": "https://app.hydrozen.io/api/dns-monitors?page=1",
+    "next": null,
+    "prev": null
+  }
+}
+
+```
+
+---
+
+### Retrieve one DNS monitor
+
+**Endpoint**
+
+*GET* `https://app.hydrozen.io/api/dns-monitors/{id}`
+
+**Example**
+
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/dns-monitors/{id}' \
+--header 'Authorization: Bearer {api_key}'
+```
+**Response example**
+
+```json
+{
+  "data": {
+    "id": 1,
+    "project_id": 0,
+    "name": "Sample",
+    "target": "example.com",
+    "dns": {
+      "A": [
+        {
+          "host": "example.com",
+          "ip": "12.12.12.12"
+        }
+      ],
+      "CNAME": [],
+      "HINFO": [],
+      "CAA": [],
+      "MX": []
+    },
+    "notifications": [1],
+    "settings": {
+      "dns_check_interval_seconds": 300
+    },
+    "total_checks": 1,
+    "total_changes": 0,
+    "last_check_datetime": "2024-01-03 01:48:42",
+    "next_check_datetime": "2024-01-03 01:49:13",
+    "last_change_datetime": null,
+    "is_enabled": true,
+    "datetime": "2023-12-31 03:54:09",
+    "last_datetime": "2024-01-03 00:16:36"
+  }
+}
+
+---
+
+### Delete DNS monitor
+
+**Endpoint**
+
+*DELETE* `https://app.hydrozen.io/api/dns-monitors/{id}`
+
+**Example**
+
+```bash
+curl --request DELETE \
+--url 'https://app.hydrozen.io/api/dns-monitors/{id}' \
+--header 'Authorization: Bearer {api_key}'
+**Response example**
+
+```json
+{
+  "message": "DNS monitor deleted successfully"
+}

@@ -835,3 +835,55 @@ curl --request DELETE \
 --url 'https://app.hydrozen.io/api/notification-handlers/{notification_handler_id}' \  
 --header 'Authorization: Bearer  {api_key}' \
 ```
+
+
+## User
+
+### Retrieve one
+
+**Endpoint**
+
+*GET* `https://app.hydrozen.io/api/user`
+
+**Example**
+
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/user' \
+--header 'Authorization: Bearer {api_key}'
+
+**Response example**
+
+```json
+{
+  "data": {
+    "id": "1",
+    "type": "users",
+    "email": "example@example.com",
+    "billing": {
+      "type": "personal",
+      "name": "John Doe",
+      "address": "Lorem Ipsum",
+      "city": "Dolor Sit",
+      "county": "Amet",
+      "zip": "5000",
+      "country": "",
+      "phone": "",
+      "tax_id": ""
+    },
+    "is_enabled": true,
+    "plan_id": "custom",
+    "plan_expiration_date": "2025-12-12 00:00:00",
+    "plan_settings": {},
+    "plan_trial_done": false,
+    "language": "english",
+    "timezone": "UTC",
+    "country": null,
+    "date": "2020-01-01 00:00:00",
+    "last_activity": "2020-01-01 00:00:00",
+    "total_logins": 10
+  }
+}
+
+
+```

@@ -886,4 +886,119 @@ curl --request GET \
 }
 
 
+## Server Monitors
+
+### Retrieve all server monitors
+
+**Endpoint**
+
+*GET* `https://app.hydrozen.io/api/server-monitors/`
+
+**Example**
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/server-monitors/' \
+--header 'Authorization: Bearer {api_key}'
+```
+
+| Parameters | Details | Description |
+|------------|----------|-------------|
+| page | `Optional` `Integer` | The page number that you want results from. Defaults to `1`. |
+| results_per_page | `Optional` `Integer` | Allowed values: `10`, `25`, `50`, `100`, `250`, `500`, `1000`. Defaults to `25`. |
+
+**Response example**
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "project_id": 0,
+      "name": "Sample",
+      "target": "123.123.123.123",
+      "settings": {
+        "server_check_interval_seconds": 60
+      },
+      "cpu_usage": 0.7,
+      "ram_usage": 30.65,
+      "disk_usage": 16.49,
+      "cpu_load_1": 0,
+      "cpu_load_5": 0,
+      "cpu_load_15": 0,
+      "is_enabled": true,
+      "total_logs": 100,
+      "last_log_datetime": "2024-01-14 02:45:05",
+      "datetime": "2024-01-12 02:17:06",
+      "last_datetime": "2024-01-14 03:03:35"
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "results_per_page": 25,
+    "total": 1,
+    "total_pages": 1
+  },
+  "links": {
+    "first": "https://app.hydrozen.io/api/server-monitors?&page=1",
+    "last": "https://app.hydrozen.io/api/server-monitors?&page=1",
+    "next": null,
+    "prev": null,
+    "self": "https://app.hydrozen.io/api/server-monitors?&page=1"
+  }
+}
+```
+
+---
+
+### Retrieve one server monitor
+
+**Endpoint**
+
+*GET* `https://app.hydrozen.io/api/server-monitors/{server_monitor_id}`
+
+**Example**
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/server-monitors/{server_monitor_id}' \
+--header 'Authorization: Bearer {api_key}'
+```
+
+**Response example**
+```json
+{
+  "data": {
+    "id": 1,
+    "project_id": 0,
+    "name": "Sample",
+    "target": "123.123.123.123",
+    "settings": {
+      "server_check_interval_seconds": 60
+    },
+    "cpu_usage": 0.7,
+    "ram_usage": 30.65,
+    "disk_usage": 16.49,
+    "cpu_load_1": 0,
+    "cpu_load_5": 0,
+    "cpu_load_15": 0,
+    "is_enabled": true,
+    "total_logs": 100,
+    "last_log_datetime": "2024-01-14 02:45:05",
+    "datetime": "2024-01-12 02:17:06",
+    "last_datetime": "2024-01-14 03:03:35"
+  }
+}
+```
+
+---
+
+### Delete server monitor
+
+**Endpoint**
+
+*DELETE* `https://app.hydrozen.io/api/server-monitors/{server_monitor_id}`
+
+**Example**
+```bash
+curl --request DELETE \
+--url 'https://app.hydrozen.io/api/server-monitors/{server_monitor_id}' \
+--header 'Authorization: Bearer {api_key}'
 ```

@@ -1,3 +1,4 @@
+
 # Hydrozen.io API Documentation
 
 This is the documentation for the available API endpoints, which are built around the REST architecture. All the API endpoints will return a JSON response with the standard HTTP response codes and need a Bearer Authentication via an API Key.
@@ -837,7 +838,535 @@ curl --request DELETE \
 ```
 
 
----
+## User
+
+### Retrieve one
+
+**Endpoint**
+
+*GET* `https://app.hydrozen.io/api/user`
+
+**Example**
+
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/user' \
+--header 'Authorization: Bearer {api_key}'
+
+**Response example**
+
+```json
+{
+  "data": {
+    "id": "1",
+    "type": "users",
+    "email": "example@example.com",
+    "billing": {
+      "type": "personal",
+      "name": "John Doe",
+      "address": "Lorem Ipsum",
+      "city": "Dolor Sit",
+      "county": "Amet",
+      "zip": "5000",
+      "country": "",
+      "phone": "",
+      "tax_id": ""
+    },
+    "is_enabled": true,
+    "plan_id": "custom",
+    "plan_expiration_date": "2025-12-12 00:00:00",
+    "plan_settings": {},
+    "plan_trial_done": false,
+    "language": "english",
+    "timezone": "UTC",
+    "country": null,
+    "date": "2020-01-01 00:00:00",
+    "last_activity": "2020-01-01 00:00:00",
+    "total_logins": 10
+  }
+}
+```
+
+## Server Monitors
+
+### Retrieve all server monitors
+
+**Endpoint**
+
+*GET* `https://app.hydrozen.io/api/server-monitors/`
+
+**Example**
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/server-monitors/' \
+--header 'Authorization: Bearer {api_key}'
+```
+
+| Parameters | Details | Description |
+|------------|----------|-------------|
+| page | `Optional` `Integer` | The page number that you want results from. Defaults to `1`. |
+| results_per_page | `Optional` `Integer` | Allowed values: `10`, `25`, `50`, `100`, `250`, `500`, `1000`. Defaults to `25`. |
+
+**Response example**
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "project_id": 0,
+      "name": "Sample",
+      "target": "123.123.123.123",
+      "settings": {
+        "server_check_interval_seconds": 60
+      },
+      "cpu_usage": 0.7,
+      "ram_usage": 30.65,
+      "disk_usage": 16.49,
+      "cpu_load_1": 0,
+      "cpu_load_5": 0,
+      "cpu_load_15": 0,
+      "is_enabled": true,
+      "total_logs": 100,
+      "last_log_datetime": "2024-01-14 02:45:05",
+      "datetime": "2024-01-12 02:17:06",
+      "last_datetime": "2024-01-14 03:03:35"
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "results_per_page": 25,
+    "total": 1,
+    "total_pages": 1
+  },
+  "links": {
+    "first": "https://app.hydrozen.io/api/server-monitors?&page=1",
+    "last": "https://app.hydrozen.io/api/server-monitors?&page=1",
+    "next": null,
+    "prev": null,
+    "self": "https://app.hydrozen.io/api/server-monitors?&page=1"
+  }
+}
+```
+
+### Retrieve one server monitor
+
+**Endpoint**
+
+*GET* `https://app.hydrozen.io/api/server-monitors/{server_monitor_id}`
+
+**Example**
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/server-monitors/{server_monitor_id}' \
+--header 'Authorization: Bearer {api_key}'
+```
+
+**Response example**
+```json
+{
+  "data": {
+    "id": 1,
+    "project_id": 0,
+    "name": "Sample",
+    "target": "123.123.123.123",
+    "settings": {
+      "server_check_interval_seconds": 60
+    },
+    "cpu_usage": 0.7,
+    "ram_usage": 30.65,
+    "disk_usage": 16.49,
+    "cpu_load_1": 0,
+    "cpu_load_5": 0,
+    "cpu_load_15": 0,
+    "is_enabled": true,
+    "total_logs": 100,
+    "last_log_datetime": "2024-01-14 02:45:05",
+    "datetime": "2024-01-12 02:17:06",
+    "last_datetime": "2024-01-14 03:03:35"
+  }
+}
+```
+
+### Delete server monitor
+
+**Endpoint**
+
+*DELETE* `https://app.hydrozen.io/api/server-monitors/{server_monitor_id}`
+
+**Example**
+```bash
+curl --request DELETE \
+--url 'https://app.hydrozen.io/api/server-monitors/{server_monitor_id}' \
+--header 'Authorization: Bearer {api_key}'
+```
+## Projects
+
+### Retrieve all
+*GET* `/api/projects/`
+
+ **Example**
+
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/projects/' \
+--header 'Authorization: Bearer {api_key}'
+```
+
+**Response**
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Development",
+      "color": "#0e23cc",
+      "last_datetime": "2021-03-14 21:22:37",
+      "datetime": "2021-02-04 17:51:07"
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "results_per_page": 25,
+    "total": 1,
+    "total_pages": 1
+  },
+  "links": {
+    "first": "https://app.hydrozen.io/api/projects?page=1",
+    "last": "https://app.hydrozen.io/api/projects?page=1",
+    "next": null,
+    "prev": null,
+    "self": "https://app.hydrozen.io/api/projects?page=1"
+  }
+}
+```
+### Retrieve one
+
+*GET* `/api/projects/{project_id}`
+
+**Example**
+
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/projects/{project_id}' \
+--header 'Authorization: Bearer {api_key}' \
+```
+
+**Response**
+
+```json
+{
+    "data": {
+        "id": 1,
+        "name": "Development",
+        "color": "#0e23cc",
+        "last_datetime": "2021-03-14 21:22:37",
+        "datetime": "2021-02-04 17:51:07"
+    }
+}
+```
+### Create
+
+*POST* `/api/projects`
+
+**Example**
+
+```bash
+curl --request POST \
+--url 'https://app.hydrozen.io/api/projects' \
+--header 'Authorization: Bearer {api_key}' \
+--header 'Content-Type: multipart/form-data' \
+--form 'name=Production' \
+--form 'color=#ffffff' \
+```
+
+**Response**
+
+```json
+{
+    "data": {
+        "id": 1
+    }
+}
+```
+### Update
+
+*POST* `/api/projects/{project_id}`
+
+**Example**
+
+```bash
+curl --request POST \
+--url 'https://app.hydrozen.io/api/projects/{project_id}' \
+--header 'Authorization: Bearer {api_key}' \
+--header 'Content-Type: multipart/form-data' \
+--form 'name=Production' \
+--form 'color=#000000' \
+```
+
+**Response**
+```json
+{
+  "data": {
+    "id": 1
+  }
+}
+```
+### Delete
+
+*DELETE* `/api/projects/{project_id}`
+
+**Example**
+
+```bash
+curl --request DELETE \
+--url 'https://app.hydrozen.io/api/projects/{project_id}' \
+--header 'Authorization: Bearer {api_key}' \
+```
+
+## Status Pages
+
+### Retrieve all
+
+*GET* `/api/status-pages/`
+
+**Example**
+
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/status-pages/' \
+--header 'Authorization: Bearer {api_key}' \
+```
+
+**Response**
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "domain_id": 0,
+      "monitors_ids": [1, 2, 3],
+      "project_id": 0,
+      "url": "example",
+      "full_url": "https://app.hydrozen.io/s/example/",
+      "name": "Example",
+      "description": "This is just a simple description for the example status page 👋.",
+      "socials": {
+        "facebook": "example",
+        "instagram": "example",
+        "twitter": "example",
+        "email": "",
+        "website": "https://example.com/"
+      },
+      "logo_url": "",
+      "favicon_url": "",
+      "password": false,
+      "timezone": "UTC",
+      "custom_js": "",
+      "custom_css": "",
+      "pageviews": 50,
+      "is_se_visible": true,
+      "is_removed_branding": false,
+      "is_enabled": true,
+      "datetime": "2021-02-16 10:47:34"
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "results_per_page": 25,
+    "total": 1,
+    "total_pages": 1
+  },
+  "links": {
+    "first": "https://app.hydrozen.io/api/status-pages?&page=1",
+    "last": "https://app.hydrozen.io/api/status-pages?&page=1",
+    "next": null,
+    "prev": null,
+    "self": "https://app.hydrozen.io/api/status-pages?&page=1"
+  }
+}
+```
+### Retrieve one
+
+*GET* `/api/status-pages/{status_page_id}`
+
+**Example**
+
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/status-pages/{status_page_id}' \
+--header 'Authorization: Bearer {api_key}' \
+```
+
+**Response**
+
+```json
+{
+  "data": {
+    "id": 1,
+    "domain_id": 0,
+    "monitors_ids": [1, 2, 3],
+    "project_id": 0,
+    "url": "example",
+    "full_url": "https://app.hydrozen.io/s/example/",
+    "name": "Example",
+    "description": "This is just a simple description for the example status page 👋.",
+    "socials": {
+      "facebook": "example",
+      "instagram": "example",
+      "twitter": "example",
+      "email": "",
+      "website": "https://example.com/"
+    },
+    "logo_url": "",
+    "favicon_url": "",
+    "password": false,
+    "timezone": "UTC",
+    "custom_js": "",
+    "custom_css": "",
+    "pageviews": 50,
+    "is_se_visible": true,
+    "is_removed_branding": false,
+    "is_enabled": true,
+    "datetime": "2021-02-16 10:47:34"
+  }
+}
+```
+
+## Custom Domains
+
+### Retrieve all
+*GET* `/api/domains/`
+
+**Example**
+
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/domains/' \
+--header 'Authorization: Bearer {api_key}' \
+```
+
+**Response**
+
+```json
+{
+    "data": [
+        {
+            "id": 1,
+            "scheme": "https://",
+            "host": "example.com",
+            "custom_index_url": "",
+            "is_enabled": true,
+            "last_datetime": null,
+            "datetime": "2021-02-04 23:29:18"
+        }
+    ],
+    "meta": {
+        "page": 1,
+        "results_per_page": 25,
+        "total": 1,
+        "total_pages": 1
+    },
+    "links": {
+        "first": "https://app.hydrozen.io/api/domains?&page=1",
+        "last": "https://app.hydrozen.io/api/domains?&page=1",
+        "next": null,
+        "prev": null,
+        "self": "https://app.hydrozen.io/api/domains?&page=1"
+    }
+}
+```
+
+### Retrieve one
+
+*GET* `/api/domains/{domain_id}`
+
+** Example**
+
+```bash
+curl --request GET \
+--url 'https://app.hydrozen.io/api/domains/{domain_id}' \
+--header 'Authorization: Bearer {api_key}' \
+```
+
+**Response**
+
+```json
+{
+    "data": {
+        "id": 1,
+        "scheme": "https://",
+        "host": "example.com",
+        "custom_index_url": "",
+        "is_enabled": true,
+        "last_datetime": null,
+        "datetime": "2021-02-04 23:29:18"
+    }
+}
+```
+
+### Create
+
+*POST* `/api/domains`
+
+**Example**
+
+```bash
+curl --request POST \
+--url 'https://app.hydrozen.io/api/domains' \
+--header 'Authorization: Bearer {api_key}' \
+--header 'Content-Type: multipart/form-data' \
+--form 'host=domain.com' \
+--form 'custom_index_url=https://mywebsite.com/' \
+--form 'custom_not_found_url=https://mywebsite.com/404-page'
+```
+
+**Response**
+
+```json
+{
+    "data": {
+        "id": 1
+    }
+}
+```
+
+### Update
+
+*POST* `/api/domains/{domain_id}`
+
+**Example**
+
+```bash
+curl --request POST \
+--url 'https://app.hydrozen.io/api/domains/{domain_id}' \
+--header 'Authorization: Bearer {api_key}' \
+--header 'Content-Type: multipart/form-data' \
+--form 'host=domain.com' \
+```
+
+**Response**
+
+```json
+{
+  "data": {
+    "id": 1
+  }
+}
+```
+
+### Delete
+
+*DELETE* `/api/domains/{domain_id}`
+
+**Example**
+
+```bash
+curl --request DELETE \
+--url 'https://app.hydrozen.io/api/domains/{domain_id}' \
+--header 'Authorization: Bearer {api_key}' \
+```
 
 ## DNS monitors
 
@@ -908,8 +1437,6 @@ curl --request GET \
 
 ```
 
----
-
 ### Retrieve one DNS monitor
 
 **Endpoint**
@@ -958,8 +1485,7 @@ curl --request GET \
     "last_datetime": "2024-01-03 00:16:36"
   }
 }
-
----
+```
 
 ### Delete DNS monitor
 
@@ -979,3 +1505,4 @@ curl --request DELETE \
 {
   "message": "DNS monitor deleted successfully"
 }
+```
